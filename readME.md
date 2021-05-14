@@ -15,6 +15,9 @@
   - Viewing the cart is an option. 
 
 
-
+# How To Run
+- Fork it
+- Clone it 
+- In the root directory run `python manage.py runserver `
 
 
