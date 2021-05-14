@@ -1,0 +1,181 @@
+{% extends 'shop/base.html' %} {%block title%}Checkout{%endblock%} {% block body
+%}
+
+<div class="container my-3" style="font-family: 'Ubuntu'">
+  <div class="col">
+    <h3>Step 1- OnlineKart Checkout: Review Your Kart Items</h3>
+    <div class="my-4">
+      <ul class="list-group" id="items"></ul>
+      <nav aria-label="breadcrumb" class="mt-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            Your Cart Total is <b> Rs: <span id="Totalprice"></span></b>. Thanks
+            For Shopping With Onlinekart And Use Our
+            <a href="/shop/tracker/">Tracker</a> To Track Your order
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col my-3">
+      <h3>Step 2-Enter Your Details</h3>
+      <form class="my-4" action="/shop/checkout/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="itemsjson" id="itemsjson" />
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="name">Name</label>
+            <input
+              type="name"
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Enter Your Name"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Enter Your Email"
+            />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputphone">Phone Number</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="phone"
+              name="phone"
+              placeholder="Enter Your Number"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            name="address"
+            placeholder="1234 Main St"
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Address Line 2</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address2"
+            name="address2"
+            placeholder="Apartment, studio, or floor"
+          />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <label for="inputCity">City</label>
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              name="city"
+              placeholder="Enter City"
+            />
+          </div>
+          <div class="form-group col-md-5">
+            <label for="inputstate">State</label>
+            <input
+              type="text"
+              class="form-control"
+              id="state"
+              name="state"
+              placeholder="Enter State"
+            />
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="inputZip">Zip</label>
+            <input
+              type="text"
+              class="form-control"
+              id="zip_codes"
+              name="zip_codes"
+              placeholder="Enter Zip Code"
+            />
+          </div>
+        </div>
+        <div class="form-group"></div>
+        <button type="submit" class="btn btn-outline-primary">
+          Place order
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block JS %}
+
+<script>
+
+  console.log('My Name Is Check Out Page');
+
+
+  if (localStorage.getItem('cart') == null) {
+
+      var Cart = {};
+  }
+  else {
+      Cart = JSON.parse(localStorage.getItem('cart'));
+
+
+  }
+
+  console.log(Cart)
+  var sum = 0;
+  var totalprice = 0;
+  if ($.isEmptyObject(Cart)) {
+      my_items = `<li class="list-group-item d-flex justify-content-between align-items-center">
+              No Items Added
+              <span class="badge badge-success badge-pill">None</span>
+          </li>`
+      //used es6
+      $('#items').append(my_items);
+
+  }
+  else {
+
+      for (item in Cart) {
+          let name = Cart[item][1];
+          let quantity = Cart[item][0];
+          let itemprice = Cart[item][2];
+          totalprice = totalprice + quantity * itemprice;
+          sum = sum + quantity;
+          my_items = `<li class="list-group-item d-flex justify-content-between align-items-center" style="">
+              ${name}
+              <span class="badge badge-primary" style=" font-size:large; font-weight: 900; font-style: italic;">Quantity:${quantity}</span>
+
+          </li>`
+          //used es6
+
+          $('#items').append(my_items);
+
+
+      }
+
+  }
+  document.getElementById('cart').innerHTML = sum;
+  document.getElementById('Totalprice').innerHTML = totalprice;
+
+
+  $('#itemsjson').val(JSON.stringify(Cart));
+  {% if thank %}
+  alert('Thanks For Ordering With OnlineKart,Your Order-ID is {{id}}. Use it to track your order using our order tracker');
+  localStorage.clear();
+  document.location = "/shop";
+  {% endif %}
+</script>
+
+{% endblock %}

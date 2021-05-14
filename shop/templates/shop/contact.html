@@ -1,0 +1,60 @@
+{% extends 'shop/base.html' %} {%block title%} Contact Us{%endblock%} {% block
+body %}
+<div id="contact_home" class="container my-5" style="font-family: 'Ubuntu'">
+  <h2>Contact Us</h2>
+
+  <form action="/shop/contact/" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Enter Your Name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter Your Email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="phone"
+        name="phone"
+        placeholder="Enter Your Number"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1"
+        >Enter Your Message Here!!...</label
+      >
+      <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-outline-danger">Submit</button>
+  </form>
+</div>
+
+{% endblock %} {% block JS %}
+
+<script>
+  {% if thank %}
+      alert('Thanks For Contaacting Us , Your response has been Submitted Succesfully!!, We will get back to you soon!');
+
+      document.location = "/shop/contact";
+      {% endif %}
+</script>
+{% endblock %}

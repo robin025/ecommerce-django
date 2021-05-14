@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %}
+
+{%block title%}Contact Us{%endblock%}
+
+{%block css%}
+
+
+{%endblock%}
+
+{% block body %}
+<div>
+
+    <div class="container py-3 " style="background-color:rgb(203, 243, 230) ;" >
+        <h2 class="text-center">Contact Us</h2>
+    <form action="/blog/contact/" method="POST" class="py-5">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name"  name="name" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
+            
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number">
+            
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="desc">Your Message</label>
+            <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+    </form>
+</div>
+
+</div>
+{% endblock  %}
+
+{% block JS %}
+
+<script>
+    {% if thank %}
+        alert('Thanks For Contacting Us , Your response has been Submitted Succesfully!!, We will get back to you very soon!!!!!');
+        
+        document.location = "/blog/contact";
+        {% endif %}
+
+</script>
+{% endblock  %} 

@@ -1,0 +1,140 @@
+{% extends 'shop/base.html' %}
+
+{%block title%}Tracker{%endblock%}
+
+{% block body %}
+
+<div class="container my-3" style="font-family: 'Ubuntu';">
+    <div class="col">
+
+        <h3>Tracker Your Orders : Enter Your Details</h3>
+        <form class="my-4" action="#" id="trackerform" method="POST">
+            {% csrf_token %}
+
+            <div class="form-row ">
+                <div class="form-group col-md-12">
+                    <label for="name">Order ID</label>
+                    <input type="name" class="form-control" id="orderid" name='orderid'
+                        placeholder="Enter Your Order ID">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="email" name='email' placeholder="Enter Your Email">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" name='phone' placeholder="Enter Your phone">
+                </div>
+
+
+            </div>
+            <button class="btn btn-outline-primary">Track Order</button>
+
+    </div>
+
+
+    <div class="col my-3">
+
+        <h3>Your Order Details</h3>
+        <div class="my-4">
+
+
+            <ul class="list-group" id="items">
+
+            </ul>
+
+        </div>
+        <h3>Your Cart Items</h3>
+
+        <div class="my-4">
+
+
+            <ul class="list-group" id="cartitems">
+
+            </ul>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock  %}
+
+
+{% block JS %}
+
+<script>
+
+    $("#trackerform").submit(function (event) {
+        $('#items').empty();
+        var formData = {
+            'orderid': $('input[name=orderid').val(),
+            'email': $('input[name=email]').val(),
+            'phone': $('input[name=phone]').val(),
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+
+
+        };
+        $.ajax({
+
+            type: 'POST',
+            url: "/shop/tracker/",
+            data: formData,
+            encode: true,
+
+
+        })
+
+            .done(function (data) {
+                console.log(data)
+                
+
+                data = JSON.parse(data);
+                updates = data[0]; 
+                console.log(updates) 
+
+
+                if (updates.length > 0 & updates != {}) {
+                    for (i = 0; i < updates.length; i++) {
+                        const text = updates[i]['text'];
+                        const time = updates[i]['time'];
+
+                        my_items = `<li class="list-group-item d-flex justify-content-between align-items-center">${text}<span class="badge badge-success badge-pill">${time}</span></li>`
+
+                        $('#items').append(my_items);
+                    }
+
+                }
+
+                else {
+
+                    my_items = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    No Data Related To Given info,Make Sure To Entre Correct Details
+                    <span class="badge badge-success badge-pill">Sorry</span>
+                </li>`
+                    //used es6
+                    $('#items').append(my_items);
+                }
+                //fill in the order details
+                cart = JSON.parse(data[1]);
+                console.log(cart)
+                for (item in cart) {
+                    let name = cart[item][1];
+                    let quantity = cart[item][0];
+                    
+                    my_items = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name}
+                    <span class="badge badge-danger badge-pill">${quantity}</span>
+                </li>`
+                    //used es6
+                    $('#cartitems').append(my_items);
+                }
+            });
+        event.preventDefault();
+    });
+</script>
+
+
+{% endblock  %}

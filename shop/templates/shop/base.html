@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> {% endcomment %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <title>{%block title%} {%endblock%}</title>
+    <style>
+      .footer{
+  background: #131921;
+  color:white;
+  
+  .links{
+    ul {list-style-type: none;}
+    li a{
+      color: white;
+      transition: color .2s;
+      &:hover{
+        text-decoration:none;
+        color:#4180CB;
+        }
+    }
+  }  
+  .about-company{
+    i{font-size: 25px;}
+    a{
+      color:white;
+      transition: color .2s;
+      &:hover{color:#4180CB}
+    }
+  } 
+  .location{
+    i{font-size: 18px;}
+  }
+  .copyright p{border-top:1px solid rgba(255,255,255,.1);} 
+}
+        
+        {% block css %}
+        {% endblock  %}
+    </style>
+  </head>
+  <body>
+    {% load static %}
+    
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#131921 ; font-family:'Ubuntu'; ">
+        <a class="navbar-brand" href="/shop">OnlineKart</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/shop/about">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/shop/contact">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/shop/tracker">Tracker</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/blog">Blog</a>
+            </li>
+            
+            
+            
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+          
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <button type="button" id="pop_cart" class="btn btn-secondary mx-2" data-container="body" data-html='true' data-toggle="popover" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+  Cart(<span id="cart">0</span>)
+</button>
+        </div>
+      </nav>
+
+      {% block body %}
+       {% endblock  %}
+
+
+ 
+    <div class="mt-5 pt-5 pb-5 footer" style="font-family: 'Ubuntu';" >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-xs-12 about-company">
+            <h2>OnlineKart</h2>
+            <p class="pr-5 text-white-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ante mollis quam tristique convallis </p>
+            <p><a href="#"><i class="fa fa-facebook-square mr-1"></i></a><a href="#"><i class="fa fa-linkedin-square"></i></a></p>
+          </div>
+          <div class="col-lg-3 col-xs-12 links">
+            <h4 class="mt-lg-0 mt-sm-3">Links</h4>
+              <ul class="column">
+                <li> <a href="/shop">Home</a></li>
+                <li> <a href="/shop/about">About Us</a></li>
+                <li> <a href="/shop/contact">Contact Us</a></li>
+                <li> <a href="">Tracker</a></li>
+                
+              </ul>
+          </div>
+          <div class="col">
+            <h4 class="col">Location</h4>
+            <p class="col">Navi Mumbai</p>
+            <p class="col"><i class="fa fa-phone mr-3"></i>(+91)784596XXXX</p>
+            <p><i class="col"></i>info@OnlineKart.com</p>
+          </div>
+        </div>
+        
+        <div class="row mt-5">
+          <div class="col copyright">
+            <p class=""><small class="text-white-50">© 2020. All Rights Reserved.</small></p>
+          </div>
+        </div>
+      </div>
+      </div>
+  
+
+
+      
+      
+    
+    
+
+
+    
+    
+
+
+
+
+    
+  
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+      {% block JS %}
+        
+    {% endblock  %}
+  </body>
+ 
+</html>
+      
